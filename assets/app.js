@@ -70,21 +70,44 @@
 
   const dot = document.querySelector(".cursor-dot");
   const ring = document.querySelector(".cursor-ring");
-  let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
-  addEventListener("pointermove", event => {
-    mx = event.clientX; my = event.clientY;
-    if (dot) dot.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
-  });
-  const followCursor = () => {
-    rx += (mx - rx) * .13; ry += (my - ry) * .13;
-    if (ring) ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
-    requestAnimationFrame(followCursor);
-  };
-  followCursor();
-  document.querySelectorAll("a,button,.tilt").forEach(el => {
-    el.addEventListener("mouseenter", () => ring?.classList.add("hover"));
-    el.addEventListener("mouseleave", () => ring?.classList.remove("hover"));
-  });
+  const finePointer = matchMedia("(pointer: fine)").matches;
+  let mx = innerWidth / 2, my = innerHeight / 2, dx = mx, dy = my, rx = mx, ry = my;
+
+  if (dot && ring && finePointer) {
+    const setCursorTransform = (el, x, y) => {
+      el.style.transform = `translate3d(${x}px,${y}px,0) translate(-50%,-50%)`;
+    };
+    addEventListener("pointermove", event => {
+      mx = event.clientX;
+      my = event.clientY;
+      document.body.classList.remove("cursor-hidden");
+    }, { passive: true });
+    addEventListener("pointerdown", () => ring.classList.add("press"));
+    addEventListener("pointerup", () => ring.classList.remove("press"));
+    addEventListener("pointerleave", () => document.body.classList.add("cursor-hidden"));
+    addEventListener("pointerenter", () => document.body.classList.remove("cursor-hidden"));
+
+    const followCursor = () => {
+      dx += (mx - dx) * .42;
+      dy += (my - dy) * .42;
+      rx += (mx - rx) * .14;
+      ry += (my - ry) * .14;
+      setCursorTransform(dot, dx, dy);
+      setCursorTransform(ring, rx, ry);
+      requestAnimationFrame(followCursor);
+    };
+    followCursor();
+
+    const hoverTargets = "a,button,.tilt,.magnetic,.theme-panel button,.path-row,.feature-card,.project-card,label,input,textarea,select";
+    document.querySelectorAll(hoverTargets).forEach(el => {
+      el.addEventListener("mouseenter", () => ring.classList.add("hover"));
+      el.addEventListener("mouseleave", () => ring.classList.remove("hover", "press"));
+    });
+    document.querySelectorAll("p,h1,h2,h3,li,span:not(.cursor-dot):not(.cursor-ring)").forEach(el => {
+      el.addEventListener("mouseenter", () => ring.classList.add("text"));
+      el.addEventListener("mouseleave", () => ring.classList.remove("text"));
+    });
+  }
 
   document.querySelectorAll(".tilt").forEach(card => {
     card.addEventListener("pointermove", event => {

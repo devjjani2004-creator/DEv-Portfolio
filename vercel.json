@@ -1,0 +1,9 @@
+{
+  "routes": [
+    { "src": "^/$", "dest": "/api/agentic?path=/" },
+    { "src": "^/(about|research|projects|experience|contact|privacy)/?$", "dest": "/api/agentic?path=/$1" },
+    { "src": "^/\\.well-known/mcp$", "dest": "/api/mcp" },
+    { "handle": "filesystem" },
+    { "src": "^/(.*)$", "dest": "/api/agentic?path=/$1" }
+  ]
+}

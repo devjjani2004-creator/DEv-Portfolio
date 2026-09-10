@@ -1,0 +1,21 @@
+# Dev Jani Portfolio
+
+> The official portfolio of Dev Jani, an AI researcher, cybersecurity practitioner, and software engineer in Gandhinagar, Gujarat, India.
+
+## Main pages
+
+- [Home](https://d-ev-portfolio.vercel.app/): profile, selected outcomes, and current focus.
+- [Research](https://d-ev-portfolio.vercel.app/research): edge LLM alignment, federated learning, smart grids, and sustainable AI.
+- [Projects](https://d-ev-portfolio.vercel.app/projects): selected AI, security, IoT, and software systems.
+- [Experience](https://d-ev-portfolio.vercel.app/experience): research, cybersecurity, software engineering, and leadership experience.
+- [About](https://d-ev-portfolio.vercel.app/about): background, technical skills, and operating principles.
+- [Contact](https://d-ev-portfolio.vercel.app/contact): professional contact details and collaboration information.
+- [Privacy](https://d-ev-portfolio.vercel.app/privacy): privacy practices for this portfolio.
+
+## Agent and developer resources
+
+- [Sitemap](https://d-ev-portfolio.vercel.app/sitemap.xml): indexable public URLs.
+- [Agent endpoint](https://d-ev-portfolio.vercel.app/.well-known/mcp): MCP Streamable HTTP endpoint exposing portfolio lookup tools.
+- [MCP manifest](https://d-ev-portfolio.vercel.app/.well-known/mcp.json): endpoint metadata and available tools.
+
+This is a personal portfolio, not a public product API. For research or engineering collaboration, use the contact page or email dev.j.jani2004@gmail.com.
